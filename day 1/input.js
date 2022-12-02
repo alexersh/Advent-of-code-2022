@@ -7,8 +7,6 @@ const input = fs
 	.split('\n')
 	.map(num => parseInt(num, 10));
 
-console.log(input);
-
 module.exports = {
 	input,
 };
