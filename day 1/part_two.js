@@ -1,3 +1,9 @@
-const { resultArray } = require('./part_one');
+const { calculateSums } = require('./utilities');
 
-console.log(resultArray[0] + resultArray[1] + resultArray[2]);
+const calculateResult = () => {
+	const resultArray = calculateSums();
+
+	return resultArray[0] + resultArray[1] + resultArray[2];
+};
+
+console.log(calculateResult());

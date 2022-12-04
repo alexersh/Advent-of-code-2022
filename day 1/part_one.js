@@ -1,23 +1,9 @@
-const { input } = require('./input');
+const { calculateSums } = require('./utilities');
 
-const resultArray = [];
+const calculateResult = () => {
+	const resultArray = calculateSums();
 
-(() => {
-	let tempSumm = 0;
-
-	input.forEach((data) => {
-		if (isNaN(data)) {
-			resultArray.push(tempSumm);
-			tempSumm = 0;
-			return;
-		}
-		tempSumm += data;
-	});
-	resultArray.sort().reverse();
-})();
-
-console.log(resultArray[0]);
-
-module.exports = {
-	resultArray,
+	return resultArray[0];
 };
+
+console.log(calculateResult());
