@@ -1,17 +1,7 @@
 const { input } = require('./input.js');
+const { calculatePointsForLetter, isIncludes } = require('./utilities.js');
 
-// a-z 97 - 122 should be 1 - 26
-// A-Z 65 - 90 should be 27 - 52
-const calculatePointsForLetter = (letter) => {
-	return letter.toUpperCase() === letter ? letter.charCodeAt(0) - 38 : letter.charCodeAt(0) - 96;
-};
-
-const isIncludes = (string, substring) => {
-	if (string.indexOf(substring) !== -1) {
-		return true;
-	}
-	return false;
-};
+let result = 0;
 
 const calculateResult = (item) => {
 	for (const letter of item[0]) {
@@ -22,17 +12,12 @@ const calculateResult = (item) => {
 	}
 };
 
-const parsedInput = input.map((data) => {
-	return [data.slice(0, data.length / 2), data.slice(data.length / 2)];
-});
+const parseInput = () => {
+	return input.map((data) => [data.slice(0, data.length / 2), data.slice(data.length / 2)]);
+};
 
-let result = 0;
+const parsedInput = parseInput();
 
 parsedInput.forEach((item) => calculateResult(item));
 
 console.log(result);
-
-module.exports = {
-	calculatePointsForLetter,
-	isIncludes,
-};

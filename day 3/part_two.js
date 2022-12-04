@@ -1,5 +1,7 @@
 const { input } = require('./input.js');
-const { calculatePointsForLetter, isIncludes } = require('./part_one.js');
+const { calculatePointsForLetter, isIncludes } = require('./utilities.js');
+
+let result = 0;
 
 const calculateResult = (item) => {
 	for (const letter of item[0]) {
@@ -19,8 +21,6 @@ const parseInput = () => {
 };
 
 const parsedInput = parseInput();
-
-let result = 0;
 
 parsedInput.forEach((item) => calculateResult(item));
 
