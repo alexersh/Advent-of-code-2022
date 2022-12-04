@@ -4,26 +4,14 @@ const isIncludesRange = (r1, r2) => {
 	return +r1[0] >= +r2[0] && +r1[1] <= +r2[1];
 };
 
-const isIncludes = (elfOne, elfTwo) => {
-	if (isIncludesRange(elfOne, elfTwo)) {
-		return true;
-	}
-	if (isIncludesRange(elfTwo, elfOne)) {
-		return true;
-	}
-	return false;
-};
-
-const calculateResult = (data) => {
+const isIncludes = (data) => {
 	const [elfOne, elfTwo] = data.split(',').map((ids) => ids.split('-'));
 
-	if (isIncludes(elfOne, elfTwo)) {
-		result += 1;
-	}
+	return isIncludesRange(elfOne, elfTwo) || isIncludesRange(elfTwo, elfOne);
 };
 
-let result = 0;
+const calculateResult = () => {
+	return input.reduce((result, data) => result + isIncludes(data), 0);
+};
 
-input.forEach((data) => calculateResult(data));
-
-console.log(result);
+console.log(calculateResult());
