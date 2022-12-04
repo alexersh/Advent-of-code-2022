@@ -1,12 +1,14 @@
 const { input } = require('./input.js');
 
-const testInput = ['2-4,6-8', '2-3,4-5', '5-7,7-9', '2-8,3-7', '6-6,4-6', '2-6,4-8'];
+const isRangesOverlaps = (r1, r2) => {
+	return +r1[1] >= +r2[0] && +r1[1] <= +r2[1];
+};
 
 const isOvelaps = (elfOne, elfTwo) => {
-	if (+elfOne[1] >= +elfTwo[0] && +elfOne[1] <= +elfTwo[1]) {
+	if (isRangesOverlaps(elfOne, elfTwo)) {
 		return true;
 	}
-	if (+elfTwo[1] >= +elfOne[0] && +elfTwo[1] <= +elfOne[1]) {
+	if (isRangesOverlaps(elfTwo, elfOne)) {
 		return true;
 	}
 	return false;

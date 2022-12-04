@@ -1,10 +1,14 @@
 const { input } = require('./input.js');
 
+const isIncludesRange = (r1, r2) => {
+	return +r1[0] >= +r2[0] && +r1[1] <= +r2[1];
+};
+
 const isIncludes = (elfOne, elfTwo) => {
-	if (+elfOne[0] >= +elfTwo[0] && +elfOne[1] <= +elfTwo[1]) {
+	if (isIncludesRange(elfOne, elfTwo)) {
 		return true;
 	}
-	if (+elfTwo[0] >= +elfOne[0] && +elfTwo[1] <= +elfOne[1]) {
+	if (isIncludesRange(elfTwo, elfOne)) {
 		return true;
 	}
 	return false;
