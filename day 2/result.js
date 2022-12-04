@@ -6,7 +6,7 @@ const OpponentsHandMap = {
 	C: 'scissors',
 };
 
-const MyHandMap = {
+const MyHandMapPt1 = {
 	X: 'rock',
 	Y: 'paper',
 	Z: 'scissors',
@@ -20,9 +20,7 @@ const PointsForShape = {
 
 const choices = ['rock', 'paper', 'scissors'];
 
-let myPoints = 0;
-
-const calculatePoints = (shape, resultPoints = 0) => {
+const calculatePoints = (shape, resultPoints) => {
 	myPoints += PointsForShape[shape] + resultPoints;
 };
 
@@ -54,16 +52,52 @@ const calculateWinner = (oppHand, myHand) => {
 	return;
 };
 
-input.forEach(game => {
+// Part one
+let myPoints = 0;
+
+input.forEach((game) => {
 	const [p1, p2] = game.toString().split(' ');
 
-	return calculateWinner(OpponentsHandMap[p1], MyHandMap[p2]);
+	calculateWinner(OpponentsHandMap[p1], MyHandMapPt1[p2]);
+});
+console.log(myPoints);
+
+// Part two
+const MyHandMapPt2 = {
+	X: 'lose',
+	Y: 'draw',
+	Z: 'win',
+};
+
+const calculateRightShape = (oppHand, needTo) => {
+	const oppHandIndex = choices.indexOf(OpponentsHandMap[oppHand]);
+
+	const isFirshElement = oppHandIndex === 0;
+	const isLastElement = oppHandIndex === choices.length - 1;
+
+	switch (needTo) {
+		case 'lose': {
+			return isFirshElement ? choices[choices.length - 1] : choices[oppHandIndex - 1];
+		}
+		case 'win': {
+			return isLastElement ? choices[0] : choices[oppHandIndex + 1];
+		}
+		// Draw
+		default: {
+			return OpponentsHandMap[oppHand];
+		}
+	}
+};
+
+myPoints = 0;
+
+input.forEach((game) => {
+	const [p1, p2] = game.toString().split(' ');
+
+	const opponentsHand = OpponentsHandMap[p1];
+	const myHand = calculateRightShape(p1, MyHandMapPt2[p2]);
+
+	calculateWinner(opponentsHand, myHand);
 });
 
 console.log(myPoints);
-
-module.exports = {
-	OpponentsHandMap,
-	choices,
-	calculateWinner,
-};
