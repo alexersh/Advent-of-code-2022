@@ -1,41 +1,34 @@
 import run from "aocrunner";
 
 const parseInput = (rawInput: string) => {
-  const input = rawInput.split("\n").map((num) => parseInt(num, 10));
+  const input = rawInput
+    .split("\n\n")
+    .map((items) => items.split("\n").map(Number));
 
   return input;
-};
-
-const calculateSums = (input: number[]) => {
-  const array: number[] = [];
-
-  let tempSumm = 0;
-
-  input.forEach((data) => {
-    if (isNaN(data)) {
-      array.push(tempSumm);
-      tempSumm = 0;
-      return;
-    }
-    tempSumm += data;
-  });
-  return array.sort((a, b) => b - a);
 };
 
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  const resultArray = calculateSums(input);
-
-  return resultArray[0];
+  // Max sum of each subarrays
+  return Math.max(...input.map((item) => item.reduce((a, b) => a + b), 0));
 };
 
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  const resultArray = calculateSums(input);
-
-  return resultArray[0] + resultArray[1] + resultArray[2];
+  return (
+    input
+      // Sum of each subarrays
+      .map((item) => item.reduce((a, b) => a + b, 0))
+      // Reversed sorting
+      .sort((a, b) => b - a)
+      // Grabbing first 3 elements
+      .slice(0, 3)
+      // Sum of last 3 elements
+      .reduce((a, b) => a + b, 0)
+  );
 };
 
 const testInput = `1000
@@ -74,5 +67,5 @@ run({
     solution: part2,
   },
   trimTestInputs: true,
-  onlyTests: true,
+  // onlyTests: true,
 });
