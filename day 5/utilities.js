@@ -44,19 +44,18 @@ const parseInput = (input) => {
 };
 
 const doMove = (crates, move, isSaveOrder) => {
-	const pile = crates[move[3] - 1]?.slice(0, move[1]);
+	const [_m, quantity, _f, from, _t, to] = move;
+	const pile = crates[from - 1]?.slice(0, quantity);
 
-	crates[move[3] - 1]?.splice(0, move[1]);
+	crates[from - 1]?.splice(0, quantity);
 
-	crates[move[5] - 1]?.splice(0, 0, ...(isSaveOrder ? pile : pile.reverse()));
+	crates[to - 1]?.splice(0, 0, ...(isSaveOrder ? pile : pile.reverse()));
 };
 
 const calcResultString = (crates) => {
 	let result = '';
 
-	for (const piles in crates) {
-		result += crates[piles][0];
-	}
+	crates.forEach((pile) => (result += pile[0]));
 
 	return result.split('[').join('').split(']').join('');
 };
