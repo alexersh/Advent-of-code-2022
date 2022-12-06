@@ -1,5 +1,5 @@
 const { input, testinput } = require('./input.js');
-const { parseInput, doMove, calcResultString } = require('./utils');
+const { parseInput, doMove, calcResultString } = require('./utilities');
 
 const calculateResult = (input) => {
 	const { crates, moves } = parseInput(input);
