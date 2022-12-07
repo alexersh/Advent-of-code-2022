@@ -7,11 +7,11 @@ const parseInput = (inputs) => {
 			curr = fileSystem;
 		} else if (input === '$ cd ..') {
 			curr = curr['..'];
-		} else if (input.includes('$ cd ')) {
-			const dirname = input.slice(5);
+		} else if (input.includes('$ cd')) {
+			const dirname = input.split(' ')[2];
 			curr = curr[dirname];
-		} else if (input.includes('dir ')) {
-			const dirname = input.slice(4);
+		} else if (input.includes('dir')) {
+			const dirname = input.split(' ')[1];
 			if (!curr[dirname]) {
 				curr[dirname] = { '..': curr };
 			}
@@ -22,11 +22,10 @@ const parseInput = (inputs) => {
 			if (!curr[filename]) {
 				curr[filename] = Number(size);
 			} else if (curr[filename] !== Number(size)) {
-				console.log('Bad input', input);
+				throw new Error('Bad input', input);
 			}
 		}
 	}
-	console.log(fileSystem);
 	return fileSystem;
 };
 
