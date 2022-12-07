@@ -1,11 +1,16 @@
 const { input, testInput } = require('./input');
 
-console.log(testInput);
-// console.log(input);
+const parseInput = (input) => {
+	console.log(input);
+};
 
-const parseInput = () => {};
+const calculateResult = (input) => {
+	const parsedInput = parseInput(input);
 
-const calculateResult = () => {};
+	const result = parsedInput;
 
-// console.log('test: ', calculateResult(testInput));
+	return result;
+};
+
+console.log('test: ', calculateResult(testInput));
 // console.log('part_one: ', calculateResult(input));
